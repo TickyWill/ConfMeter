@@ -80,8 +80,8 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-hal_app.ipynb
-hal_app_to_functs.ipynb
+cm_app_dev.ipynb
+hal_app_init.ipynb
 
 # IPython
 profile_default/
