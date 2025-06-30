@@ -18,7 +18,7 @@ from bmfuncts.useful_functs import set_year_pub_id
 
 # Local imports
 import cmfuncts.conf_globals as cg
-import cmfuncts.employees_globals as eg
+import cmfuncts.employees_globals as cm_eg
 from cmfuncts.cols_rename import build_hal_col_conversion_dic
 from cmfuncts.hal_hash_id import create_hal_hash_id
 from cmfuncts.format_files import format_hal_page
@@ -53,14 +53,14 @@ def _add_hal_author_job_type(merged_df):
         return author_type
 
     # Setting useful aliases
-    category_col_alias = eg.EMPLOYEES_USEFUL_COLS['category']
-    status_col_alias = eg.EMPLOYEES_USEFUL_COLS['status']
-    qualification_col_alias = eg.EMPLOYEES_USEFUL_COLS['qualification']
+    category_col_alias = cm_eg.EMPLOYEES_USEFUL_COLS['category']
+    status_col_alias = cm_eg.EMPLOYEES_USEFUL_COLS['status']
+    qualification_col_alias = cm_eg.EMPLOYEES_USEFUL_COLS['qualification']
     author_type_col_alias = cg.CONF_ADD_COLS['author_type']
 
-    author_types_dic = {category_col_alias      : eg.CATEGORIES_DIC,
-                        status_col_alias        : eg.STATUS_DIC,
-                        qualification_col_alias : eg.QUALIFICATION_DIC}
+    author_types_dic = {category_col_alias      : cm_eg.CATEGORIES_DIC,
+                        status_col_alias        : cm_eg.STATUS_DIC,
+                        qualification_col_alias : cm_eg.QUALIFICATION_DIC}
 
     merged_df[author_type_col_alias] = merged_df.apply(_get_author_type, axis=1)
     
@@ -178,12 +178,12 @@ def _add_hal_authors_name_list(org_tup, merged_df):
     auth_idx_alias = cg.CONF_COLS['author_idx']              # 'Idx_author'
     author_type_alias = cg.CONF_ADD_COLS['author_type']      # "Type de l'auteur"    
     inst_auth_list_alias = cg.CONF_ADD_COLS['inst_authors']  # "Liste ordonnée des auteurs de l'institut"
-    nom_alias = eg.EMPLOYEES_USEFUL_COLS['name']             # "Nom"
-    prenom_alias = eg.EMPLOYEES_USEFUL_COLS['first_name']    # "Prénom"
-    matricule_alias = eg.EMPLOYEES_USEFUL_COLS['matricule']  # "Matricule"
-    dept_alias = eg.EMPLOYEES_USEFUL_COLS['dpt']             # "Dpt/DOB (lib court)"
-    serv_alias = eg.EMPLOYEES_USEFUL_COLS['serv']            # "Service (lib court)"
-    lab_alias = eg.EMPLOYEES_USEFUL_COLS['lab']              # "Laboratoire (lib court)"
+    nom_alias = cm_eg.EMPLOYEES_USEFUL_COLS['name']             # "Nom"
+    prenom_alias = cm_eg.EMPLOYEES_USEFUL_COLS['first_name']    # "Prénom"
+    matricule_alias = cm_eg.EMPLOYEES_USEFUL_COLS['matricule']  # "Matricule"
+    dept_alias = cm_eg.EMPLOYEES_USEFUL_COLS['dpt']             # "Dpt/DOB (lib court)"
+    serv_alias = cm_eg.EMPLOYEES_USEFUL_COLS['serv']            # "Service (lib court)"
+    lab_alias = cm_eg.EMPLOYEES_USEFUL_COLS['lab']              # "Laboratoire (lib court)"
     
     # Setting intermediate col name
     names_temp_col = "Nom, Prénom"

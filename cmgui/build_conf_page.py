@@ -30,7 +30,6 @@ from bmgui.gui_utils import set_page_title
 
 # Local imports
 import cmgui.cm_gui_globals as cm_gg
-import cmfuncts.institute_globals as ig
 from cmfuncts.build_employees import adapt_search_depth
 from cmfuncts.build_employees import read_hal_employees_data
 from cmfuncts.build_employees import set_empl_paths
@@ -472,7 +471,7 @@ def build_conf_list(self, master, page_name, institute, wf_path):
     step_label_pos_x = mm_to_px(bm_gg.REF_ETAPE_POS_X_MM * master.width_sf_mm,
                                 bm_gg.PPI)
     step_label_pos_y_list = [mm_to_px( y * master.height_sf_mm, bm_gg.PPI)
-                             for y in cm_gg.REF_STEP_POS_Y_MM_LIST]
+                             for y in cm_gg.STEP_POS_Y_MM_REF_LIST]
     step_button_dx = mm_to_px(bm_gg.REF_ETAPE_BUT_DX_MM * master.width_sf_mm,
                               bm_gg.PPI)
     step_button_dy = mm_to_px(bm_gg.REF_ETAPE_BUT_DY_MM * master.height_sf_mm,
@@ -496,8 +495,8 @@ def build_conf_list(self, master, page_name, institute, wf_path):
     hal_all_empl_dict = {}
 
     # Creating and setting widgets for page title and exit button
-    page_label = cm_gg.PAGES_LABELS[page_name]
-    set_page_title(self, master, page_label, institute)     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    page_label_alias = cm_gg.PAGES_LABELS[page_name]
+    set_page_title(self, master, page_label_alias, institute)
     set_exit_button(self, master)
 
     # Initializing progress bar widget
@@ -512,9 +511,9 @@ def build_conf_list(self, master, page_name, institute, wf_path):
     step_label_font = tkFont.Font(family=bm_gg.FONT_NAME,
                                    size=eff_step_font_size,
                                    weight='bold')
-    steps_number = cm_gg.STEPS_NB
     step_label_format = 'left'
     step_underline = -1
+    steps_number = cm_gg.STEPS_NB
     step_label_widget = [_set_step_label(self, step_num) for step_num in range(steps_number)]
 
 

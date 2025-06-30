@@ -16,7 +16,7 @@ from pathlib import Path
 import pandas as pd
 
 # Local imports
-import cmfuncts.employees_globals as eg
+import cmfuncts.employees_globals as cm_eg
 from cmfuncts.format_files import add_sheets_to_workbook
 from cmfuncts.useful_functs import capitalize_name
 
@@ -34,10 +34,10 @@ def set_empl_paths(wf_root_path):
         the list of the names (str) of these two files).
     """
     # Setting specific aliases
-    empl_root_alias = eg.EMPLOYEES_ARCHI["root"]
-    empl_folder_name_alias = eg.EMPLOYEES_ARCHI["all_years_employees"]
-    empl_file_name_alias = eg.EMPLOYEES_ARCHI["employees_file_name"]
-    hal_empl_file_name_alias = eg.EMPLOYEES_ARCHI["hal_employees_file_name"]
+    empl_root_alias = cm_eg.EMPLOYEES_ARCHI["root"]
+    empl_folder_name_alias = cm_eg.EMPLOYEES_ARCHI["all_years_employees"]
+    empl_file_name_alias = cm_eg.EMPLOYEES_ARCHI["employees_file_name"]
+    hal_empl_file_name_alias = cm_eg.EMPLOYEES_ARCHI["hal_employees_file_name"]
 
     # Setting useful paths
     empl_root_path = wf_root_path / Path(empl_root_alias)
@@ -72,11 +72,11 @@ def update_hal_employees_data(wf_root_path, progress_callback=None):
         (dataframe) for the year).
     """
     # Setting specific column aliases
-    first_name_col_alias = eg.EMPLOYEES_USEFUL_COLS['first_name']
-    last_name_col_alias = eg.EMPLOYEES_USEFUL_COLS['name']
-    fullname_col_alias = eg.EMPLOYEES_ADD_COLS['employee_full_name']
-    empl_use_cols_alias = eg.EMPLOYEES_USEFUL_COLS.values()
-    empl_add_cols_alias = eg.EMPLOYEES_ADD_COLS.values()
+    first_name_col_alias = cm_eg.EMPLOYEES_USEFUL_COLS['first_name']
+    last_name_col_alias = cm_eg.EMPLOYEES_USEFUL_COLS['name']
+    fullname_col_alias = cm_eg.EMPLOYEES_ADD_COLS['employee_full_name']
+    empl_use_cols_alias = cm_eg.EMPLOYEES_USEFUL_COLS.values()
+    empl_add_cols_alias = cm_eg.EMPLOYEES_ADD_COLS.values()
 
     # Setting useful paths
     paths_list, _ = set_empl_paths(wf_root_path)
@@ -90,9 +90,9 @@ def update_hal_employees_data(wf_root_path, progress_callback=None):
     cols_list = list(empl_use_cols_alias) + list(empl_add_cols_alias)
     all_empl_dict = pd.read_excel(all_empl_path,
                                   sheet_name=None,
-                                  dtype=eg.EMPLOYEES_COL_TYPES,
+                                  dtype=cm_eg.EMPLOYEES_COL_TYPES,
                                   usecols=cols_list,
-                                  converters=eg.EMPLOYEES_CONVERTERS_DIC)
+                                  converters=cm_eg.EMPLOYEES_CONVERTERS_DIC)
     years_to_update = list(all_empl_dict.keys())
     steps_nb = int(len(years_to_update))
 
@@ -140,7 +140,7 @@ def update_hal_employees_data(wf_root_path, progress_callback=None):
 
 def adapt_search_depth(corpus_year, hal_all_empl_dict):
     # Setting specific aliase    
-    search_depth_init_alias = eg.SEARCH_DEPTH
+    search_depth_init_alias = cm_eg.SEARCH_DEPTH
     
     # Identifying available years in employees data
     empl_available_years = [int(x) for x in list(hal_all_empl_dict.keys())]
@@ -172,9 +172,9 @@ def read_hal_employees_data(wf_root_path):
         of employees data).    
     """
     # Setting specific aliases
-    fullname_col_alias = eg.EMPLOYEES_ADD_COLS['employee_full_name']
-    empl_use_cols_alias = eg.EMPLOYEES_USEFUL_COLS.values()
-    empl_add_cols_alias = eg.EMPLOYEES_ADD_COLS.values()
+    fullname_col_alias = cm_eg.EMPLOYEES_ADD_COLS['employee_full_name']
+    empl_use_cols_alias = cm_eg.EMPLOYEES_USEFUL_COLS.values()
+    empl_add_cols_alias = cm_eg.EMPLOYEES_ADD_COLS.values()
 
     # Setting useful paths
     paths_list, _ = set_empl_paths(wf_root_path)
@@ -185,7 +185,7 @@ def read_hal_employees_data(wf_root_path):
                     + [fullname_col_alias]
     hal_all_empl_dict = pd.read_excel(hal_all_empl_path,
                                       sheet_name = None,
-                                      dtype = eg.EMPLOYEES_COL_TYPES,
+                                      dtype = cm_eg.EMPLOYEES_COL_TYPES,
                                       usecols = hal_cols_list,
-                                      converters=eg.EMPLOYEES_CONVERTERS_DIC)
+                                      converters=cm_eg.EMPLOYEES_CONVERTERS_DIC)
     return hal_all_empl_dict

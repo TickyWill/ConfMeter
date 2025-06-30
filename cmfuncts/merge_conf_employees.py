@@ -24,7 +24,7 @@ import pandas as pd
 
 # Local inports
 import cmfuncts.conf_globals as cg
-import cmfuncts.employees_globals as eg
+import cmfuncts.employees_globals as cm_eg
 from cmfuncts.build_employees import adapt_search_depth
 from cmfuncts.build_employees import read_hal_employees_data
 from cmfuncts.conf_extract import read_conf_extract
@@ -169,9 +169,9 @@ def _add_hal_ext_docs(wf_path, init_valid_df, init_orphan_df,
     orphan_treat_root_alias = cg.ORPHAN_ARCHI["root"]
     adds_file_name_alias = cg.ORPHAN_ARCHI["employees adds file"]
     ext_docs_sheet_alias = cg.ORPHAN_SHEET_NAMES["docs to add"]
-    converters_alias = eg.EMPLOYEES_CONVERTERS_DIC
-    ext_docs_cols_alias = eg.EXT_DOCS_USEFUL_COLS.copy()
-    firstname_initials_col_alias = eg.EMPLOYEES_ADD_COLS['first_name_initials']
+    converters_alias = cm_eg.EMPLOYEES_CONVERTERS_DIC
+    ext_docs_cols_alias = cm_eg.EXT_DOCS_USEFUL_COLS.copy()
+    firstname_initials_col_alias = cm_eg.EMPLOYEES_ADD_COLS['first_name_initials']
 
     # Correcting useful column name
     ext_docs_cols_alias[-2] = firstname_initials_col_alias
@@ -353,8 +353,8 @@ def recursive_year_search(wf_root_path, wf_path, corpus_year, conf_df=pd.DataFra
     pub_id_alias = cg.CONF_COLS['pub_id']                              # 'Pub_id'
     auth_idx_alias = cg.CONF_COLS['author_idx']                        # 'Idx_author'
     co_auth_alias = cg.CONF_COLS['co_author']                          # 'Co_auteur' => 'Co_author'
-    fullname_alias = eg.EMPLOYEES_ADD_COLS['employee_full_name']       # 'Employee_full_name'
-    merge_auth_alias = eg.TEMP_COLS["merge_author"]                    # "Join co-author"
+    fullname_alias = cm_eg.EMPLOYEES_ADD_COLS['employee_full_name']       # 'Employee_full_name'
+    merge_auth_alias = cm_eg.TEMP_COLS["merge_author"]                    # "Join co-author"
 
     # Setting useful columns list
     cols_list = [pub_id_alias, auth_idx_alias, fullname_alias, merge_auth_alias]

@@ -4,11 +4,11 @@ __all__ = ['APP_COPYRIGHT',
            'APP_VERSION',
            'HAL_DATATYPE',
            'HELP_BUTTON',
+           'MAIN_PAGE_TITLE',
            'PAGES_LABELS',
-           'PAGE_TITLE',
            'REF_HELP_BUT_POS_X_MM',
            'REF_HELP_BUT_POS_Y_MM',
-           'REF_STEP_POS_Y_MM_LIST',
+           'STEP_POS_Y_MM_REF_LIST',
            'REF_YEAR_BUT_POS_X_MM',
            'REF_YEAR_BUT_POS_Y_MM',
            'STEP_HELPS_LIST',
@@ -35,7 +35,7 @@ PAGES_LABELS = {'BuildConfPage' : "Consolidation annuelle des corpus",
 # =================== Cover Page (launching Page) ===================
 
 # Titre de la page
-PAGE_TITLE = "- ConfMeter -\nInitialisation de l'analyse"
+MAIN_PAGE_TITLE = "- ConfMeter -\nInitialisation de l'analyse"
 
 # Copyright and contacts
 APP_COPYRIGHT  =   "Contributeurs et contacts :"
@@ -58,7 +58,10 @@ REF_YEAR_BUT_POS_Y_MM = 50
 
 # Setting parameters for each step
 STEPS_NB = 4
-REF_STEP_POS_Y_MM_LIST = [20, 74, 101, 129]
+STEPS_DY = 27
+STEPS_Y_INIT = 74
+STEP_POS_Y_MM_REF_LIST = sum([[20], [STEPS_Y_INIT + n * STEPS_DY for n in range(STEPS_NB-1)]], [])
+# STEP_POS_Y_MM_REF_LIST = [20, 74, 101, 129]
 STEP_LABEL, STEP_HELP, STEP_LAUNCH = [], [], []
 
 # Step 0

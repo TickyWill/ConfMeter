@@ -14,14 +14,7 @@ from functools import partial
 from pathlib import Path
 
 # 3rd party imports
-from screeninfo import get_monitors
-
-# Local imports
 import bmgui.gui_globals as bm_gg
-import cmgui.cm_gui_globals as cm_gg
-import cmfuncts.institute_globals as ig
-from cmfuncts.useful_functs import create_cm_archi
-from cmgui.build_conf_page import build_conf_list
 from bmgui.gui_utils import enable_buttons
 from bmgui.gui_utils import font_size
 from bmgui.gui_utils import general_properties
@@ -30,6 +23,13 @@ from bmgui.gui_utils import mm_to_px
 from bmgui.gui_utils import place_after
 from bmgui.gui_utils import show_frame
 from bmgui.gui_utils import str_size_mm
+from screeninfo import get_monitors
+
+# Local imports
+import cmgui.cm_gui_globals as cm_gg
+import cmfuncts.institute_globals as cm_ig
+from cmfuncts.useful_functs import create_cm_archi
+from cmgui.build_conf_page import build_conf_list
 
 
 class AppMain(tk.Tk):
@@ -76,7 +76,7 @@ class AppMain(tk.Tk):
                                    size=eff_wf_font_size,
                                    weight='bold')
             wf_label = tk.Label(self,
-                                 text=bm_gg.TEXT_WF,
+                                 text=bm_gg.WF_TXT,
                                  font=wf_font,)
             wf_val = tk.StringVar(self)
             wf_val2 = tk.StringVar(self)
@@ -84,14 +84,14 @@ class AppMain(tk.Tk):
             wf_button_font = tkFont.Font(family=bm_gg.FONT_NAME,
                                           size=eff_buttons_font_size)
             wf_button = tk.Button(self,
-                                   text=bm_gg.TEXT_WF_CHANGE,
+                                   text=bm_gg.WF_CHANGE_TXT,
                                    font=wf_button_font,
                                    command=lambda: _get_file(institute_select))
             # Placing wf widgets
             wf_label.place(x=eff_wf_pos_x_px,
                             y=eff_wf_pos_y_px,)
 
-            text_width_mm, _ = str_size_mm(bm_gg.TEXT_WF, wf_font, bm_gg.PPI)
+            text_width_mm, _ = str_size_mm(bm_gg.WF_TXT, wf_font, bm_gg.PPI)
             eff_path_pos_x_px = mm_to_px(text_width_mm + space_mm_alias, bm_gg.PPI)
             wf_entree2.place(x=eff_path_pos_x_px,
                               y=eff_wf_pos_y_px,)
@@ -166,10 +166,10 @@ class AppMain(tk.Tk):
             corpi_button_font = tkFont.Font(family=bm_gg.FONT_NAME,
                                             size=eff_buttons_font_size)
             corpi_label = tk.Label(self,
-                                   text=bm_gg.TEXT_CORPUSES,
+                                   text=bm_gg.CORPUSES_TXT,
                                    font=corpi_font,)
             corpi_button = tk.Button(self,
-                                     text=bm_gg.TEXT_BOUTON_CREATION_CORPUS,
+                                     text=bm_gg.CREATE_CORPUS_BUTTON_TXT,
                                      font=corpi_button_font,
                                      command=lambda: _create_corpus(inst_wf))
 
@@ -177,7 +177,7 @@ class AppMain(tk.Tk):
             corpi_label.place(x=eff_corpi_pos_x_px,
                               y=eff_corpi_pos_y_px,)
 
-            text_width_mm, _ = str_size_mm(bm_gg.TEXT_CORPUSES, corpi_font, bm_gg.PPI)
+            text_width_mm, _ = str_size_mm(bm_gg.CORPUSES_TXT, corpi_font, bm_gg.PPI)
             eff_list_pos_x_px = mm_to_px(text_width_mm + space_mm_alias, bm_gg.PPI)
             corpi_entry.place(x=eff_list_pos_x_px,
                               y=eff_corpi_pos_y_px,)
@@ -209,7 +209,7 @@ class AppMain(tk.Tk):
             institute_select = institute_widget.get()
 
             # Managing working folder
-            inst_default_wf = ig.WORKING_FOLDERS_DICT[institute_select] + "-" + cm_gg.VERSION
+            inst_default_wf = cm_ig.WORKING_FOLDERS_DICT[institute_select] + "-" + cm_gg.VERSION
             _set_wf_widget_param(institute_select, inst_default_wf)
 
             # Managing corpus list
@@ -305,7 +305,7 @@ class AppMain(tk.Tk):
         SetAuthorCopyright(self)
 
         # Setting default values for Institute selection
-        institutes_list = ig.INSTITUTES_LIST
+        institutes_list = cm_ig.INSTITUTES_LIST
         default_institute = "   "
         institute_val = tk.StringVar(self)
         institute_val.set(default_institute)
@@ -321,7 +321,7 @@ class AppMain(tk.Tk):
                                            size=eff_select_font_size,
                                            weight='bold')
         self.inst_label = tk.Label(self,
-                                   text=bm_gg.TEXT_INSTITUTE,
+                                   text=bm_gg.INSTITUTE_TXT,
                                    font=self.inst_label_font)
 
         # Placing widgets for Institute selection
@@ -348,7 +348,7 @@ class SetMasterTitle():
 
         # Creating widget for page title
         page_title = tk.Label(master,
-                              text=cm_gg.PAGE_TITLE,
+                              text=cm_gg.MAIN_PAGE_TITLE,
                               font=(bm_gg.FONT_NAME, eff_page_title_font_size),
                               justify="center")
 
@@ -410,7 +410,7 @@ class SetLaunchButton(tk.Tk):
                                   size=eff_launch_font_size,
                                   weight='bold')
         launch_button = tk.Button(master,
-                                  text=bm_gg.TEXT_BOUTON_LANCEMENT,
+                                  text=bm_gg.LAUNCH_BUTTON_TXT,
                                   font=launch_font,
                                   command=lambda: self._generate_pages(master,
                                                                        institute,
@@ -464,8 +464,12 @@ class SetLaunchButton(tk.Tk):
             self.frames = {}
             for page in master.pages:
                 page_name = page.__name__
-                frame = page(master, pagebutton_frame, page_frame,
-                             institute, wf_path)
+                if datatype:
+                    frame = page(master, pagebutton_frame, page_frame,
+                                 institute, wf_path, datatype)
+                else:
+                    frame = page(master, pagebutton_frame, page_frame,
+                                 institute, wf_path)
                 self.frames[page_name] = frame
 
                 # Putting all of the pages in the same location
