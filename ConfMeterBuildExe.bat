@@ -108,12 +108,20 @@ echo The BiblioMeter packages successfully installed
 echo:
 echo Installing ConfMeter packages
 echo:
-pip install git+https://github.com/TickyWill/ConfMeter.git@%bm_branch%
+pip install git+https://github.com/TickyWill/ConfMeter.git@%cm_branch%
 cls
 echo The package ConfMeter successfully installed >> %LOG%
 echo:
 echo The ConfMeter packages successfully installed
 echo:
+echo Installing HalApyJson packages
+echo:
+pip install HalApyJson
+cls
+echo The package HalApyJson successfully installed >> %LOG%
+echo:
+echo The package HalApyJson successfully installed
+echo:   
 echo Installing auto-py-to-exe packages
 echo:
 pip install auto-py-to-exe
@@ -144,10 +152,12 @@ if exist %PGM% (
 
 :: Setting the icon and the directories to add
 set "ICON=%working_dir%/venv/Lib/site-packages/cmfuncts/ConfigFiles/CM-logo.ico"
-set "FUNC=%working_dir%/venv/Lib/site-packages/cmfuncts;cmfuncts/"
-set "GUI=%working_dir%/venv/Lib/site-packages/cmgui;cmgui/"
+set "CMFUNC=%working_dir%/venv/Lib/site-packages/cmfuncts;cmfuncts/"
+set "CMGUI=%working_dir%/venv/Lib/site-packages/cmgui;cmgui/"
 set "PARSE=%working_dir%/venv/Lib/site-packages/BiblioParsing;BiblioParsing/"
-set "BM"=%working_dir%/venv/Lib/site-packages/BiblioMeter;BiblioMeter/"
+set "BMFUNC=%working_dir%/venv/Lib/site-packages/bmfuncts;bmfuncts/"
+set "BMGUI=%working_dir%/venv/Lib/site-packages/bmgui;bmgui/"
+set "HTJ=%working_dir%/venv/Lib/site-packages/HalToJson;HalToJson/"
 
 :: Making the executable app.exe to be located in dist
 cls
@@ -155,10 +165,12 @@ echo Making the executable app.exe to be located in dist
 echo:
 pyinstaller --noconfirm --onefile --console^
  --icon="%ICON%"^
- --add-data "%FUNC%"^
- --add-data "%GUI%"^
+ --add-data "%CMFUNC%"^
+ --add-data "%CMGUI%"^
  --add-data "%PARSE%"^
- --add-data "%BM%"^
+ --add-data "%BMFUNC%"^
+ --add-data "%BMGUI%"^
+ --add-data "%HTJ%"^
  "%PGM%"
 if exist %working_dir%\dist\app.exe (
     echo The executable app.exe successfully made in dist directory >> %LOG%
