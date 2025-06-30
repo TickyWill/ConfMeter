@@ -1,5 +1,5 @@
 git+https://github.com/TickyWill/BiblioParsing.git@main
-git+https://github.com/TickyWill/BiblioMeter.git@v6.2.0
+git+https://github.com/TickyWill/BiblioMeter.git@Refactoring_GUI
 HalApyJson==1.1.3
 auto_py_to_exe==2.42.0
 numpy==1.26.3

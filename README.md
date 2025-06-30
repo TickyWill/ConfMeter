@@ -20,7 +20,7 @@ Ensure that your environment complies with the requirements given in the followi
 
 ## Documentation building
 Run the following commands to build the sphinx documentation:
-- Only in case of a previous building
+- Only in case of a previous building (creation of "docs" folder under progress)
 ```
 docs\make.bat clean
 ```
@@ -34,6 +34,7 @@ Open the following ConfMeter sphinx-documentation html file:
 >docs/docbuild/html/index.html
 
 ## Building executable
+Creation of batch file and manual under progress
 Either run the following batch file:
 <p><a href=https://github.com/TickyWill/ConfMeter/blob/main/ConfMeterBuildExe.bat>ConfMeter executable-building batch file
 </a></p>
@@ -52,6 +53,7 @@ app.mainloop()
 ```
 
 **for more details on application usage refer to the user manual:** 
+Creation of user manual under progress
 <p><a href=https://github.com/TickyWill/ConfMeter/blob/main/confMeterUserManual-Fr.pdf>ConfMeter user manual
 </a></p>
 
