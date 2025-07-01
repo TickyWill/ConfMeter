@@ -12,6 +12,9 @@ __all__ = ['capitalize_name',
 import BiblioParsing as bp
 from bmfuncts.useful_functs import create_folder
 
+# Local imports
+import cmfuncts.conf_globals as cm_cg
+
 
 def capitalize_name(name):
     """ Capitalizes each word in a text representing a name.
@@ -63,7 +66,7 @@ def create_cm_archi(wf_path, corpus_year_folder, verbose=False):
         (str): End message recalling the corpus-year architecture created.
     """
     # Setting useful alias
-    archi_alias = cg.CM_ARCHI
+    archi_alias = cm_cg.CM_ARCHI
 
     # Creating architecture for corpus-year working-folder
     corpus_year_folder_path = create_folder(wf_path, corpus_year_folder, verbose=verbose)

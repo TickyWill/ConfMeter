@@ -14,6 +14,7 @@ from functools import partial
 from pathlib import Path
 
 # 3rd party imports
+import bmfuncts.pub_globals as bm_pg
 import bmgui.gui_globals as bm_gg
 from bmgui.gui_utils import enable_buttons
 from bmgui.gui_utils import font_size
@@ -25,7 +26,8 @@ from bmgui.gui_utils import show_frame
 from bmgui.gui_utils import str_size_mm
 from screeninfo import get_monitors
 
-# Local imports
+# Local imports# Local imports
+import cmfuncts.conf_globals as cm_cg
 import cmgui.cm_gui_globals as cm_gg
 import cmfuncts.institute_globals as cm_ig
 from cmfuncts.useful_functs import create_cm_archi
@@ -66,7 +68,7 @@ class AppMain(tk.Tk):
             # Updating wf values using new working directory
             _set_wf_widget_param(institute_select, wf_str)            
             _update_corpi(wf_str)
-            wf_path = Path(wf_str)                                                      #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            wf_path = Path(wf_str)
             SetLaunchButton(self, institute_select, wf_path, datatype_alias)
 
 
@@ -142,12 +144,9 @@ class AppMain(tk.Tk):
                 corpi_val.set(corpi_val_to_set)
 
                 # Dispaying info
-                extractions_folder_alias = pg.ARCHI_EXTRACT['root']
                 info_title = "- Information -"
                 info_text = (f"L'architecture du dossier pour l'année {new_corpus_year_folder} "
-                             "a été créée dans le dossier de travail."
-                             "\n\nAvant de lancer l'analyse, mettez les extractions "
-                             f"correspondantes dans le dossier :\n\n  '{extractions_folder_alias}'.")
+                             "a été créée dans le dossier de travail.")
                 messagebox.showinfo(info_title, info_text)
             else:
                 corpi_val.set("")
@@ -252,9 +251,9 @@ class AppMain(tk.Tk):
         _ = get_monitors() # Mandatory
         self.attributes("-topmost", True)
         self.after_idle(self.attributes,'-topmost', False)
-#        icon_path = Path(__file__).parent.parent / Path('bmfuncts') / Path(pg.CONFIG_FOLDER)
-#        icon_path = icon_path / Path('BM-logo.ico')
-#        self.iconbitmap(icon_path)
+        icon_path = Path(__file__).parent.parent / Path('cmfuncts') / Path(cm_cg.CONFIG_FOLDER)
+        icon_path = icon_path / Path('CM-logo.ico')
+        self.iconbitmap(icon_path)
 
         # Initializing AppMain attributes set after working folder definition
         AppMain.years_list = []
@@ -438,7 +437,7 @@ class SetLaunchButton(tk.Tk):
 
             if datatype:
                 # Setting rawdata for datatype
-                for database in pg.BDD_LIST:
+                for database in bm_pg.BDD_LIST:
                     _ = set_rawdata(wf_path, datatype,
                                     master.years_list, database)
 

@@ -26,7 +26,7 @@ from openpyxl.styles import Border as openpyxl_Border
 from openpyxl.styles import Side as openpyxl_Side
 
 # Local imports
-import cmfuncts.conf_globals as cg
+import cmfuncts.conf_globals as cm_cg
 
 
 def add_sheets_to_workbook(file_full_path, df_to_add, sheet_name):
@@ -64,24 +64,24 @@ def _set_hal_col_attr(cols_rename_dict):
         attributes for formating data before openpyxl save, \
         list of the column names that have attributes).
     """
-    init_col_attr = {cg.HASH_COL['hash_id']           : [15, "center"],
-                     cg.CONF_COLS['pub_id']           : [15, "center"],
-                     cg.CONF_COLS['pub_year']         : [12, "center"],
-                     cg.CONF_COLS['conf_year']        : [12, "center"],
-                     cg.CONF_COLS['conf_date']        : [12, "center"],
-                     cg.CONF_COLS['first_author']     : [25, "center"],
-                     cg.CONF_ADD_COLS['inst_authors'] : [40, "left"],                              
-                     cg.CONF_COLS['authors']          : [40, "left"], 
-                     cg.CONF_COLS['title']            : [40, "left"],
-                     cg.CONF_COLS['conf_name']        : [40, "left"],
-                     cg.CONF_COLS['doctype']          : [15, "center"],
-                     cg.CONF_COLS['doi']              : [20, "center"],
-                     cg.CONF_ADD_COLS['full_ref']     : [55, 'left'],
-                     cg.CONF_COLS['town']             : [20, "center"],
-                     cg.CONF_COLS['country']          : [15, "center"],
-                     cg.CONF_COLS['commitee']         : [12, "center"],
-                     cg.CONF_COLS['proceedings']      : [12, "center"],
-                     cg.CONF_COLS['url']              : [50, "left"]
+    init_col_attr = {cm_cg.HASH_COL['hash_id']           : [15, "center"],
+                     cm_cg.CONF_COLS['pub_id']           : [15, "center"],
+                     cm_cg.CONF_COLS['pub_year']         : [12, "center"],
+                     cm_cg.CONF_COLS['conf_year']        : [12, "center"],
+                     cm_cg.CONF_COLS['conf_date']        : [12, "center"],
+                     cm_cg.CONF_COLS['first_author']     : [25, "center"],
+                     cm_cg.CONF_ADD_COLS['inst_authors'] : [40, "left"],                              
+                     cm_cg.CONF_COLS['authors']          : [40, "left"], 
+                     cm_cg.CONF_COLS['title']            : [40, "left"],
+                     cm_cg.CONF_COLS['conf_name']        : [40, "left"],
+                     cm_cg.CONF_COLS['doctype']          : [15, "center"],
+                     cm_cg.CONF_COLS['doi']              : [20, "center"],
+                     cm_cg.CONF_ADD_COLS['full_ref']     : [55, 'left'],
+                     cm_cg.CONF_COLS['town']             : [20, "center"],
+                     cm_cg.CONF_COLS['country']          : [15, "center"],
+                     cm_cg.CONF_COLS['commitee']         : [12, "center"],
+                     cm_cg.CONF_COLS['proceedings']      : [12, "center"],
+                     cm_cg.CONF_COLS['url']              : [50, "left"]
                     }
 
     final_cols = [cols_rename_dict[col] for col in init_col_attr.keys()]
@@ -112,8 +112,8 @@ def format_hal_page(df, cols_rename_dict, wb=None):
         formatted active sheet).
     """
     # Setting useful aliases
-    xl_idx_base_alias = cg.XL_INDEX_BASE
-    df_title_alias = cg.CONF_DF_TITLE
+    xl_idx_base_alias = cm_cg.XL_INDEX_BASE
+    df_title_alias = cm_cg.CONF_DF_TITLE
 
     # Setting first column to format
     col_idx_init = 0

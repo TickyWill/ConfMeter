@@ -116,6 +116,7 @@ echo The ConfMeter packages successfully installed
 echo:
 echo Installing HalApyJson packages
 echo:
+::pip install git+https://github.com/Bertin-fap/HalApyJson@main
 pip install HalApyJson
 cls
 echo The package HalApyJson successfully installed >> %LOG%
@@ -157,7 +158,7 @@ set "CMGUI=%working_dir%/venv/Lib/site-packages/cmgui;cmgui/"
 set "PARSE=%working_dir%/venv/Lib/site-packages/BiblioParsing;BiblioParsing/"
 set "BMFUNC=%working_dir%/venv/Lib/site-packages/bmfuncts;bmfuncts/"
 set "BMGUI=%working_dir%/venv/Lib/site-packages/bmgui;bmgui/"
-set "HTJ=%working_dir%/venv/Lib/site-packages/HalToJson;HalToJson/"
+set "HTJ=%working_dir%/venv/Lib/site-packages/HalApyJson;HalApyJson/"
 
 :: Making the executable app.exe to be located in dist
 cls

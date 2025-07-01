@@ -15,7 +15,7 @@ from bmfuncts.create_hash_id import _my_hash
 from bmfuncts.useful_functs import reorder_df
 
 # Local imports
-import cmfuncts.conf_globals as cg
+import cmfuncts.conf_globals as cm_cg
 
 
 def save_hash_data(cm_files_path, corpus_year, hash_id_df):
@@ -30,8 +30,8 @@ def save_hash_data(cm_files_path, corpus_year, hash_id_df):
         (str): End message.
     """
     # Setting useful aliases
-    conf_empl_folder_alias = cg.CM_ARCHI['conf_empl_folder']
-    hash_file_alias = cg.CM_ARCHI['hash_id_file_name']
+    conf_empl_folder_alias = cm_cg.CM_ARCHI['conf_empl_folder']
+    hash_file_alias = cm_cg.CM_ARCHI['hash_id_file_name']
 
     # Setting specific paths
     year_cmf_path = cm_files_path / Path(corpus_year)
@@ -75,14 +75,14 @@ def create_hal_hash_id(cm_files_path, corpus_year, valid_df):
         (dataframe): The updated list of contributions to conferences.        
     """
     # Setting useful aliases
-    hash_id_alias = cg.HASH_COL['hash_id']
-    pub_id_alias = cg.CONF_COLS['pub_id']                    # 'Pub_id'
-    authors_alias = cg.HAL_USE_COLS['authors']               # 'Auteurs'
-    title_alias = cg.CONF_COLS['title']                      # "Titres"
-    doctype_alias = cg.CONF_COLS['doctype']                  # "Type de document"
-    conf_year_alias = cg.CONF_COLS['conf_year']              # "Année de conférence"
-    conf_name_alias = cg.CONF_COLS['conf_name']              # "Conference"
-    country_alias = cg.CONF_COLS['country']                  # "Pays"
+    hash_id_alias = cm_cg.HASH_COL['hash_id']
+    pub_id_alias = cm_cg.CONF_COLS['pub_id']                    # 'Pub_id'
+    authors_alias = cm_cg.HAL_USE_COLS['authors']               # 'Auteurs'
+    title_alias = cm_cg.CONF_COLS['title']                      # "Titres"
+    doctype_alias = cm_cg.CONF_COLS['doctype']                  # "Type de document"
+    conf_year_alias = cm_cg.CONF_COLS['conf_year']              # "Année de conférence"
+    conf_name_alias = cm_cg.CONF_COLS['conf_name']              # "Conference"
+    country_alias = cm_cg.CONF_COLS['country']                  # "Pays"
 
     # Setting useful columns list
     useful_cols = [pub_id_alias, conf_year_alias, conf_name_alias, country_alias,

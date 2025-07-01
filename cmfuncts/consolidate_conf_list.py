@@ -17,7 +17,7 @@ import pandas as pd
 from bmfuncts.useful_functs import set_year_pub_id
 
 # Local imports
-import cmfuncts.conf_globals as cg
+import cmfuncts.conf_globals as cm_cg
 import cmfuncts.employees_globals as cm_eg
 from cmfuncts.cols_rename import build_hal_col_conversion_dic
 from cmfuncts.hal_hash_id import create_hal_hash_id
@@ -56,7 +56,7 @@ def _add_hal_author_job_type(merged_df):
     category_col_alias = cm_eg.EMPLOYEES_USEFUL_COLS['category']
     status_col_alias = cm_eg.EMPLOYEES_USEFUL_COLS['status']
     qualification_col_alias = cm_eg.EMPLOYEES_USEFUL_COLS['qualification']
-    author_type_col_alias = cg.CONF_ADD_COLS['author_type']
+    author_type_col_alias = cm_cg.CONF_ADD_COLS['author_type']
 
     author_types_dic = {category_col_alias      : cm_eg.CATEGORIES_DIC,
                         status_col_alias        : cm_eg.STATUS_DIC,
@@ -108,16 +108,16 @@ def _add_conf_full_ref(merged_df):
         (dataframe): The updated data.
     """
     # Setting useful aliases
-    unknown_alias = cg.INDISPONIBLE
-    pub_id_alias = cg.CONF_COLS['pub_id']                    # 'Pub_id'
-    first_author_alias = cg.CONF_COLS['first_author']        # "Premier auteur
-    pub_year_alias = cg.CONF_COLS['pub_year']                # "Année de publication"
-    conf_year_alias = cg.CONF_COLS['conf_year']              # "Année de conférence"
-    conf_name_alias = cg.CONF_COLS['conf_name']              # 'Conference'
-    country_alias = cg.CONF_COLS['country']                  # "Pays"
-    doi_alias = cg.CONF_COLS['doi']                          # "DOI"
-    title_alias = cg.CONF_COLS['title']                      # "Titres"
-    conf_full_ref_alias = cg.CONF_ADD_COLS['full_ref']       # "Référence bibliographique complète"
+    unknown_alias = cm_cg.INDISPONIBLE
+    pub_id_alias = cm_cg.CONF_COLS['pub_id']                    # 'Pub_id'
+    first_author_alias = cm_cg.CONF_COLS['first_author']        # "Premier auteur
+    pub_year_alias = cm_cg.CONF_COLS['pub_year']                # "Année de publication"
+    conf_year_alias = cm_cg.CONF_COLS['conf_year']              # "Année de conférence"
+    conf_name_alias = cm_cg.CONF_COLS['conf_name']              # 'Conference'
+    country_alias = cm_cg.CONF_COLS['country']                  # "Pays"
+    doi_alias = cm_cg.CONF_COLS['doi']                          # "DOI"
+    title_alias = cm_cg.CONF_COLS['title']                      # "Titres"
+    conf_full_ref_alias = cm_cg.CONF_ADD_COLS['full_ref']       # "Référence bibliographique complète"
 
     # Splitting the frame into subframes with same Pub_id
     conf_plus_full_ref_df = pd.DataFrame()
@@ -173,11 +173,11 @@ def _add_hal_authors_name_list(org_tup, merged_df):
     dpt_label_dict = org_tup[1]
 
     # Setting useful aliases
-    unknown_alias = cg.INDISPONIBLE
-    pub_id_alias = cg.CONF_COLS['pub_id']                    # 'Pub_id'
-    auth_idx_alias = cg.CONF_COLS['author_idx']              # 'Idx_author'
-    author_type_alias = cg.CONF_ADD_COLS['author_type']      # "Type de l'auteur"    
-    inst_auth_list_alias = cg.CONF_ADD_COLS['inst_authors']  # "Liste ordonnée des auteurs de l'institut"
+    unknown_alias = cm_cg.INDISPONIBLE
+    pub_id_alias = cm_cg.CONF_COLS['pub_id']                    # 'Pub_id'
+    auth_idx_alias = cm_cg.CONF_COLS['author_idx']              # 'Idx_author'
+    author_type_alias = cm_cg.CONF_ADD_COLS['author_type']      # "Type de l'auteur"    
+    inst_auth_list_alias = cm_cg.CONF_ADD_COLS['inst_authors']  # "Liste ordonnée des auteurs de l'institut"
     nom_alias = cm_eg.EMPLOYEES_USEFUL_COLS['name']             # "Nom"
     prenom_alias = cm_eg.EMPLOYEES_USEFUL_COLS['first_name']    # "Prénom"
     matricule_alias = cm_eg.EMPLOYEES_USEFUL_COLS['matricule']  # "Matricule"
@@ -260,9 +260,9 @@ def set_results_paths(wf_path, corpus_year, key):
         the list of the names (str) of these two files).
     """
     # Setting useful aliases
-    results_folder_alias = cg.CM_ARCHI['final_results_folder']
-    base_name_alias = cg.CM_ARCHI['conf_list_file_base']
-    key_name_alias = cg.CONF_NAMES_DIC[key]
+    results_folder_alias = cm_cg.CM_ARCHI['final_results_folder']
+    base_name_alias = cm_cg.CM_ARCHI['conf_list_file_base']
+    key_name_alias = cm_cg.CONF_NAMES_DIC[key]
 
     # Building file name
     key_file_name, key_sheet_name = _build_useful_names(base_name_alias,
@@ -326,13 +326,13 @@ def _split_conf_list_by_doc_type(wf_path, corpus_year,
         consolidated number (int) of the contributions to conferences).
     """
     # Setting useful column names
-    pub_id_col = cols_rename_dict[cg.CONF_COLS['pub_id']]
-    doc_type_col = cols_rename_dict[cg.CONF_COLS['doctype']]
+    pub_id_col = cols_rename_dict[cm_cg.CONF_COLS['pub_id']]
+    doc_type_col = cols_rename_dict[cm_cg.CONF_COLS['doctype']]
     
     others_dg = full_conf_list_df.copy()
     conf_nb = len(full_conf_list_df)
     key_conf_nb = 0
-    for key, doctype_list in cg.CONF_TYPES_DIC.items():
+    for key, doctype_list in cm_cg.CONF_TYPES_DIC.items():
         doctype_list = [x.upper() for x in doctype_list]
         key_dg = pd.DataFrame(columns=full_conf_list_df.columns)
         for doc_type, dg in full_conf_list_df.groupby(doc_type_col):
@@ -395,9 +395,9 @@ def build_final_conf_list(wf_path, org_tup, corpus_year, merged_df=pd.DataFrame(
         to conferences.
     """
     # Setting useful aliases
-    pub_id_alias = cg.CONF_COLS['pub_id']
-    pub_year_alias = cg.CONF_COLS['pub_year']
-    shift_alias = cg.PUB_ID_SHIFT
+    pub_id_alias = cm_cg.CONF_COLS['pub_id']
+    pub_year_alias = cm_cg.CONF_COLS['pub_year']
+    shift_alias = cm_cg.PUB_ID_SHIFT
     
     # Setting the initial list of Institute contributions to conferences
     if merged_df.empty:
@@ -446,7 +446,7 @@ def build_final_conf_list(wf_path, org_tup, corpus_year, merged_df=pd.DataFrame(
     # Selecting columns for final list
     select_cols_list = cols_rename_dict.keys()
     sub_merged_df = merged_df[select_cols_list]
-    conf_list_df = sub_merged_df.drop_duplicates(cg.DEDUP_COLS_LIST)
+    conf_list_df = sub_merged_df.drop_duplicates(cm_cg.DEDUP_COLS_LIST)
     conf_list_df = conf_list_df.rename(columns=cols_rename_dict)
     
     # Saving final conferences list

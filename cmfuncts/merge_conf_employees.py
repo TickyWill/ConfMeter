@@ -23,7 +23,7 @@ from pathlib import Path
 import pandas as pd
 
 # Local inports
-import cmfuncts.conf_globals as cg
+import cmfuncts.conf_globals as cm_cg
 import cmfuncts.employees_globals as cm_eg
 from cmfuncts.build_employees import adapt_search_depth
 from cmfuncts.build_employees import read_hal_employees_data
@@ -81,8 +81,8 @@ def _save_names_corr_data(confmeter_path, corpus_year, conf_df):
         conf_df (dataframe): The conferences data to save.
     """
     # Setting useful aliases
-    hal_corpus_alias = cg.CM_ARCHI['corpus_folder']
-    corr_file_base_alias = cg.CM_ARCHI['hal_corr_file_base']
+    hal_corpus_alias = cm_cg.CM_ARCHI['corpus_folder']
+    corr_file_base_alias = cm_cg.CM_ARCHI['hal_corr_file_base']
 
     # Setting specific file name
     corr_file = corpus_year + corr_file_base_alias
@@ -115,16 +115,16 @@ def _check_hal_names_spelling(wf_path, corpus_year, conf_df):
         spelling of author names have been corrected.
     """
     # Setting useful aliases
-    orphan_treat_root_alias = cg.ORPHAN_ARCHI["root"]
-    orthograph_file_name_alias = cg.ORPHAN_ARCHI["orthograph file"]
+    orphan_treat_root_alias = cm_cg.ORPHAN_ARCHI["root"]
+    orthograph_file_name_alias = cm_cg.ORPHAN_ARCHI["orthograph file"]
 
     # Setting useful column names (name stands for fullname)
-    pub_id_alias = cg.CONF_COLS['pub_id']
-    pub_name_alias = cg.CONF_COLS['co_author']
-    first_author_alias = cg.CONF_COLS['first_author']
-    authors_alias = cg.CONF_COLS['authors']
-    ortho_pub_name_alias = cg.ORTHO_COLS['pub_fullname']
-    ortho_empl_name_alias = cg.ORTHO_COLS['empl_fullname']
+    pub_id_alias = cm_cg.CONF_COLS['pub_id']
+    pub_name_alias = cm_cg.CONF_COLS['co_author']
+    first_author_alias = cm_cg.CONF_COLS['first_author']
+    authors_alias = cm_cg.CONF_COLS['authors']
+    ortho_pub_name_alias = cm_cg.ORTHO_COLS['pub_fullname']
+    ortho_empl_name_alias = cm_cg.ORTHO_COLS['empl_fullname']
 
     # Setting useful path
     orphan_treat_root_path = wf_path / Path(orphan_treat_root_alias)
@@ -166,9 +166,9 @@ def _check_hal_names_spelling(wf_path, corpus_year, conf_df):
 def _add_hal_ext_docs(wf_path, init_valid_df, init_orphan_df,
                       merge_auth_col, fullname_col):
     # Setting useful aliases
-    orphan_treat_root_alias = cg.ORPHAN_ARCHI["root"]
-    adds_file_name_alias = cg.ORPHAN_ARCHI["employees adds file"]
-    ext_docs_sheet_alias = cg.ORPHAN_SHEET_NAMES["docs to add"]
+    orphan_treat_root_alias = cm_cg.ORPHAN_ARCHI["root"]
+    adds_file_name_alias = cm_cg.ORPHAN_ARCHI["employees adds file"]
+    ext_docs_sheet_alias = cm_cg.ORPHAN_SHEET_NAMES["docs to add"]
     converters_alias = cm_eg.EMPLOYEES_CONVERTERS_DIC
     ext_docs_cols_alias = cm_eg.EXT_DOCS_USEFUL_COLS.copy()
     firstname_initials_col_alias = cm_eg.EMPLOYEES_ADD_COLS['first_name_initials']
@@ -218,9 +218,9 @@ def set_merge_paths(wf_path, corpus_year):
         the list of the names (str) of these two files).
     """
     # Setting useful aliases
-    conf_empl_folder_alias = cg.CM_ARCHI['conf_empl_folder']
-    valid_file_alias = cg.CM_ARCHI['valid_authors']
-    orphan_file_alias = cg.CM_ARCHI['orphan_authors']
+    conf_empl_folder_alias = cm_cg.CM_ARCHI['conf_empl_folder']
+    valid_file_alias = cm_cg.CM_ARCHI['valid_authors']
+    orphan_file_alias = cm_cg.CM_ARCHI['orphan_authors']
 
     # Setting specific paths
     year_cmf_path = wf_path / Path(corpus_year)
@@ -350,9 +350,9 @@ def recursive_year_search(wf_root_path, wf_path, corpus_year, conf_df=pd.DataFra
         The updated out of merge data (dataframe)).
     """
     # Setting specific aliases
-    pub_id_alias = cg.CONF_COLS['pub_id']                              # 'Pub_id'
-    auth_idx_alias = cg.CONF_COLS['author_idx']                        # 'Idx_author'
-    co_auth_alias = cg.CONF_COLS['co_author']                          # 'Co_auteur' => 'Co_author'
+    pub_id_alias = cm_cg.CONF_COLS['pub_id']                              # 'Pub_id'
+    auth_idx_alias = cm_cg.CONF_COLS['author_idx']                        # 'Idx_author'
+    co_auth_alias = cm_cg.CONF_COLS['co_author']                          # 'Co_auteur' => 'Co_author'
     fullname_alias = cm_eg.EMPLOYEES_ADD_COLS['employee_full_name']       # 'Employee_full_name'
     merge_auth_alias = cm_eg.TEMP_COLS["merge_author"]                    # "Join co-author"
 

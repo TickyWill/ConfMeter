@@ -21,7 +21,7 @@ import HalApyJson as haj
 import pandas as pd
 
 # Local imports
-import cmfuncts.conf_globals as cg
+import cmfuncts.conf_globals as cm_cg
 
 
 def _set_country_iso_dict():
@@ -32,12 +32,12 @@ def _set_country_iso_dict():
         the country name in English.
     """
     # Setting useful aliases
-    country_iso_file_alias = cg.CM_ARCHI['country_iso_file']
-    country_sheet_alias = cg.CM_ARCHI['country_iso_sheet']   # "Base"
-    country_cols_alias = cg.CM_ARCHI['country_iso_usecols']  # ["Code", "English name"]
+    country_iso_file_alias = cm_cg.CM_ARCHI['country_iso_file']
+    country_sheet_alias = cm_cg.CM_ARCHI['country_iso_sheet']   # "Base"
+    country_cols_alias = cm_cg.CM_ARCHI['country_iso_usecols']  # ["Code", "English name"]
     
     # Setting specific paths independant from corpus_year
-    config_folder_path = Path(__file__).parent / Path(cg.CONFIG_FOLDER)
+    config_folder_path = Path(__file__).parent / Path(cm_cg.CONFIG_FOLDER)
     country_iso_file_path = config_folder_path / Path(country_iso_file_alias)
 
     # Building ISO code-country dict
@@ -64,9 +64,9 @@ def set_extract_paths(wf_path, corpus_year):
         the list of the names (str) of these two files).
     """
     # Setting useful aliases
-    hal_corpus_alias = cg.CM_ARCHI['corpus_folder']
-    full_file_base_alias = cg.CM_ARCHI['hal_full_file_base']
-    conf_file_base_alias = cg.CM_ARCHI['hal_conf_file_base']
+    hal_corpus_alias = cm_cg.CM_ARCHI['corpus_folder']
+    full_file_base_alias = cm_cg.CM_ARCHI['hal_full_file_base']
+    conf_file_base_alias = cm_cg.CM_ARCHI['hal_conf_file_base']
 
     # Setting specific file names dependent on corpus_year
     year_full_file = corpus_year + full_file_base_alias
@@ -96,9 +96,9 @@ def _save_hal_data(wf_path, corpus_year, hal_full_df, hal_conf_df):
         hal_conf_df (dataframe): The conferences data to save.
     """
     # Setting useful aliases
-    hal_corpus_alias = cg.CM_ARCHI['corpus_folder']
-    full_file_base_alias = cg.CM_ARCHI['hal_full_file_base']
-    conf_file_base_alias = cg.CM_ARCHI['hal_conf_file_base']
+    hal_corpus_alias = cm_cg.CM_ARCHI['corpus_folder']
+    full_file_base_alias = cm_cg.CM_ARCHI['hal_full_file_base']
+    conf_file_base_alias = cm_cg.CM_ARCHI['hal_conf_file_base']
 
     # Setting specific file names dependent on corpus_year
     year_full_file = corpus_year + full_file_base_alias
@@ -142,20 +142,20 @@ def set_hal_to_conf(institute, wf_path, corpus_year, progress_callback=None):
         (dataframe): The built data.
     """
     # Setting useful aliases
-    unknown_alias = cg.INDISPONIBLE
-    authors_alias = cg.HAL_USE_COLS['authors']         # 'Auteurs'
-    pub_date_alias = cg.HAL_USE_COLS['pub_date']       # "Date de publication"
-    conf_date_alias = cg.HAL_USE_COLS['conf_date']     # "Date de conference"
-    pub_id_alias = cg.CONF_COLS['pub_id']              # 'Pub_id'
-    auth_idx_alias = cg.CONF_COLS['author_idx']        # 'Idx_author'
-    co_auth_alias = cg.CONF_COLS['co_author']          # 'Co_auteur' => 'Co_author'
-    town_alias = cg.CONF_COLS['town']                  # "Ville"
-    country_alias = cg.CONF_COLS['country']            # "Pays"
-    first_author_alias = cg.CONF_COLS['first_author']  # "Premier auteur"
-    conf_year_alias = cg.CONF_COLS['conf_year']        # "Année de conférence"
-    pub_year_alias = cg.CONF_COLS['pub_year']          # "Année de publication"
-    doctype_alias = cg.CONF_COLS['doctype']            # "Type de document"
-    full_ref_alias = cg.HAL_USE_COLS['full_ref']       # "01"
+    unknown_alias = cm_cg.INDISPONIBLE
+    authors_alias = cm_cg.HAL_USE_COLS['authors']         # 'Auteurs'
+    pub_date_alias = cm_cg.HAL_USE_COLS['pub_date']       # "Date de publication"
+    conf_date_alias = cm_cg.HAL_USE_COLS['conf_date']     # "Date de conference"
+    pub_id_alias = cm_cg.CONF_COLS['pub_id']              # 'Pub_id'
+    auth_idx_alias = cm_cg.CONF_COLS['author_idx']        # 'Idx_author'
+    co_auth_alias = cm_cg.CONF_COLS['co_author']          # 'Co_auteur' => 'Co_author'
+    town_alias = cm_cg.CONF_COLS['town']                  # "Ville"
+    country_alias = cm_cg.CONF_COLS['country']            # "Pays"
+    first_author_alias = cm_cg.CONF_COLS['first_author']  # "Premier auteur"
+    conf_year_alias = cm_cg.CONF_COLS['conf_year']        # "Année de conférence"
+    pub_year_alias = cm_cg.CONF_COLS['pub_year']          # "Année de publication"
+    doctype_alias = cm_cg.CONF_COLS['doctype']            # "Type de document"
+    full_ref_alias = cm_cg.HAL_USE_COLS['full_ref']       # "01"
 
     # Extracting the HAL corpus
     hal_full_df = haj.build_hal_df_from_api(corpus_year, institute.lower())   
@@ -164,7 +164,7 @@ def set_hal_to_conf(institute, wf_path, corpus_year, progress_callback=None):
     
 
     # Selecting communications and posters to build the conferences data
-    init_hal_conf_df = hal_full_df[hal_full_df[doctype_alias].isin(cg.CONF_TYPES)]
+    init_hal_conf_df = hal_full_df[hal_full_df[doctype_alias].isin(cm_cg.CONF_TYPES)]
 
     # Cleaning the conferences data
     clean_hal_conf_df = init_hal_conf_df.copy()
@@ -185,7 +185,7 @@ def set_hal_to_conf(institute, wf_path, corpus_year, progress_callback=None):
             progress_step = (final_progress_bar - progress_bar) / steps_nb
 
     # Adding useful columns to the conferences data 
-    new_hal_conf_df = pd.DataFrame(columns=cg.HAL_USE_COLS.values())
+    new_hal_conf_df = pd.DataFrame(columns=cm_cg.HAL_USE_COLS.values())
     pub_id = 0
     for _, row in clean_hal_conf_df.iterrows():
         row[pub_id_alias] = pub_id
@@ -206,7 +206,7 @@ def set_hal_to_conf(institute, wf_path, corpus_year, progress_callback=None):
         if progress_callback:
             progress_bar += progress_step
             progress_callback(progress_bar)
-    hal_conf_df = new_hal_conf_df[cg.CONF_COLS.values()]
+    hal_conf_df = new_hal_conf_df[cm_cg.CONF_COLS.values()]
 
     # Setting useful paths
     paths_list, _ = set_extract_paths(wf_path, corpus_year)
@@ -239,6 +239,6 @@ def read_conf_extract(wf_path, corpus_year):
     _, _, conf_file_path = paths_list
 
     # Reading the file resulting from the HAL extraction
-    conf_df = pd.read_excel(conf_file_path, usecols=cg.CONF_COLS.values())
+    conf_df = pd.read_excel(conf_file_path, usecols=cm_cg.CONF_COLS.values())
 
     return conf_df
