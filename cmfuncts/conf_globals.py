@@ -58,7 +58,7 @@ CM_ARCHI = {'corpus_folder'        : "0- HAL corpus",
 
 
 CONF_NAMES_DIC = {'conferences'    : "Conférences",
-                  'communications' : "Communications",
+                  'communications' : "Oraux",
                   'posters'        : "Posters",
                   'others'         : "Autres",}
 
@@ -67,7 +67,6 @@ CONF_TYPES_DIC = {'communications' : ['COMM'],
 
 
 CONF_TYPES = sum(list(CONF_TYPES_DIC.values()), [])
-
 
 
 HAL_USE_COLS = {'authors'     : 'Auteurs',
